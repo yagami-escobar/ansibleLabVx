@@ -10,6 +10,9 @@ echo "[NODE] Create Ansible User"
 useradd -m ansible
 echo "ansible:ansible" | chpasswd
 usermod -aG sudo ansible
+mkdir -p /home/ansible
+chsh -s /bin/bash ansible
+
 
 echo "[NODE] Config SSH Home:"
 mkdir -p /var/run/sshd
@@ -18,13 +21,14 @@ touch /home/ansible/.ssh/authorized_keys
 chown -R ansible:ansible /home/ansible/.ssh
 chmod 700 /home/ansible/.ssh
 chmod 600 /home/ansible/.ssh/authorized_keys
-chsh -s /bin/bash ansible
+
 echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 echo "[NODE] Enable password authentication:"
+sudo sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config.d/60-cloudimg-settings.conf || true
 sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-systemctl restart ssh
+sudo systemctl restart ssh
 
 echo "[NODE] Add control to /etc/hosts"
 cat<<EOF >> /etc/hosts
