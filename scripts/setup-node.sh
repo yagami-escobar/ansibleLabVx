@@ -21,6 +21,11 @@ chmod 600 /home/ansible/.ssh/authorized_keys
 chsh -s /bin/bash ansible
 echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
+echo "[NODE] Enable password authentication:"
+sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+systemctl restart ssh
+
 echo "[NODE] Add control to /etc/hosts"
 cat<<EOF >> /etc/hosts
 192.168.56.10 control

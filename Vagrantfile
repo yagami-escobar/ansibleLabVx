@@ -10,6 +10,9 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
     end
     control.vm.provision "shell", path: "scripts/setup-control.sh"
+    control.vm.provision "shell", inline: <<-SHELL
+      echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
+    SHELL
   end
 
   # Nodo gestionado 1
@@ -20,6 +23,9 @@ Vagrant.configure("2") do |config|
       vb.memory = 512
     end
     node1.vm.provision "shell", path: "scripts/setup-node.sh"
+    node1.vm.provision "shell", inline: <<-SHELL
+      echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
+    SHELL
   end
 
   # Nodo gestionado 2
@@ -30,5 +36,8 @@ Vagrant.configure("2") do |config|
       vb.memory = 512
     end
     node2.vm.provision "shell", path: "scripts/setup-node.sh"
+    node2.vm.provision "shell", inline: <<-SHELL
+      echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
+    SHELL
   end
 end
