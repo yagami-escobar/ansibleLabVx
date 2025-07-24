@@ -28,6 +28,19 @@ Vagrant.configure("2") do |config|
     SHELL
   end
   
+  # Nodo gestionado 3
+  config.vm.define "node3" do |node3|
+    node3.vm.hostname = "node3"
+    node3.vm.network "private_network", ip: "192.168.56.12"
+    node3.vm.provider "virtualbox" do |vb|
+      vb.memory = 1024
+    end
+    node3.vm.provision "shell", path: "scripts/setup-node.sh"
+    node3.vm.provision "shell", inline: <<-SHELL
+      echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
+    SHELL
+  end
+
   # Nodo de control
   config.vm.define "control" do |control|
     control.vm.hostname = "control"
