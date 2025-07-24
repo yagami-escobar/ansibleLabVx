@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   # Box base
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "ubuntu/jammy64"
 
   # Nodo de control
   config.vm.define "control" do |control|
@@ -14,9 +14,9 @@ Vagrant.configure("2") do |config|
 
   # Nodo gestionado 1
   config.vm.define "node1" do |node1|
-    node.vm.hostname = "node1"
-    node.vm.network "private_network", ip: "192.168.56.11"
-    node.vm.provider "virtualbox" do |vb|
+    node1.vm.hostname = "node1"
+    node1.vm.network "private_network", ip: "192.168.56.11"
+    node1.vm.provider "virtualbox" do |vb|
       vb.memory = 512
     end
     node1.vm.provision "shell", path: "scripts/setup-node.sh"
@@ -24,9 +24,9 @@ Vagrant.configure("2") do |config|
 
   # Nodo gestionado 2
   config.vm.define "node2" do |node2|
-    node.vm.hostname = "node2"
-    node.vm.network "private_network", ip: "192.168.56.12"
-    node.vm.provider "virtualbox" do |vb|
+    node2.vm.hostname = "node2"
+    node2.vm.network "private_network", ip: "192.168.56.12"
+    node2.vm.provider "virtualbox" do |vb|
       vb.memory = 512
     end
     node2.vm.provision "shell", path: "scripts/setup-node.sh"
