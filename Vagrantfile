@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     node1.vm.hostname = "node1"
     node1.vm.network "private_network", ip: "192.168.56.11"
     node1.vm.provider "virtualbox" do |vb|
-      vb.memory = 512
+      vb.memory = 1024
     end
     node1.vm.provision "shell", path: "scripts/setup-node.sh"
     node1.vm.provision "shell", inline: <<-SHELL
@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     node2.vm.hostname = "node2"
     node2.vm.network "private_network", ip: "192.168.56.12"
     node2.vm.provider "virtualbox" do |vb|
-      vb.memory = 512
+      vb.memory = 1024
     end
     node2.vm.provision "shell", path: "scripts/setup-node.sh"
     node2.vm.provision "shell", inline: <<-SHELL
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
     control.vm.hostname = "control"
     control.vm.network "private_network", ip: "192.168.56.10"
     control.vm.provider "virtualbox" do |vb|
-      vb.memory = 1024
+      vb.memory = 2048
     end
     control.vm.provision "shell", path: "scripts/setup-control.sh"
     control.vm.provision "shell", inline: <<-SHELL
