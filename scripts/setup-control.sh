@@ -14,6 +14,7 @@ usermod -aG sudo ansible
 mkdir -p /home/ansible
 
 echo "[CONTROL] Config SSH Home:"
+mkdir -p /home/ansible/.ssh
 chown -R ansible:ansible /home/ansible/.ssh
 chmod 700 /home/ansible/.ssh
 echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
