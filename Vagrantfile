@@ -2,19 +2,6 @@ Vagrant.configure("2") do |config|
   # Box base
   config.vm.box = "ubuntu/jammy64"
 
-  # Nodo de control
-  config.vm.define "control" do |control|
-    control.vm.hostname = "control"
-    control.vm.network "private_network", ip: "192.168.56.10"
-    control.vm.provider "virtualbox" do |vb|
-      vb.memory = 1024
-    end
-    control.vm.provision "shell", path: "scripts/setup-control.sh"
-    control.vm.provision "shell", inline: <<-SHELL
-      echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
-    SHELL
-  end
-
   # Nodo gestionado 1
   config.vm.define "node1" do |node1|
     node1.vm.hostname = "node1"
@@ -41,3 +28,16 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 end
+
+  # Nodo de control
+  config.vm.define "control" do |control|
+    control.vm.hostname = "control"
+    control.vm.network "private_network", ip: "192.168.56.10"
+    control.vm.provider "virtualbox" do |vb|
+      vb.memory = 1024
+    end
+    control.vm.provision "shell", path: "scripts/setup-control.sh"
+    control.vm.provision "shell", inline: <<-SHELL
+      echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
+    SHELL
+  end
