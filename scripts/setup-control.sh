@@ -1,5 +1,4 @@
 #! /bin/bash
-
 set -euo pipefail
 
 echo "[CONTROL] Install Pkgs Base:"
@@ -20,6 +19,17 @@ chmod 700 /home/ansible/.ssh
 echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 
-# echo "[CONTROL] Copy EntryPoint ..."
-# cp ./scripts/entrypoint.sh /entrypoint.sh
-# chmod +x /entrypoint.sh
+
+echo "[CONTROL] Generate SSH Key for Ansible:"
+sudo -u ansible ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa -N ""
+
+echo "[CONTROL] Copy SSH Key to Managed Nodes:"
+for ip in 192.168.56.11 192.168.56.12; do
+    sshpass -p "ansible" ssh-copy-id -o StrictHostKeyChecking=no ansible@$ip
+done
+
+echo "[CONTROL] Add managed nods to /etc/hosts:"
+cat<<EOF >> /etc/hosts
+192.168.56.11 node1
+192.168.56.12 node2
+EOF

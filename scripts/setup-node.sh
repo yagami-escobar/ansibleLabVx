@@ -21,7 +21,7 @@ chmod 600 /home/ansible/.ssh/authorized_keys
 chsh -s /bin/bash ansible
 echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-
-# echo "[NODE] Copy EntryPoint ..."
-# cp ./scripts/entrypoint.sh /entrypoint.sh
-# chmod +x /entrypoint.sh
+echo "[NODE] Add control to /etc/hosts"
+cat<<EOF >> /etc/hosts
+192.168.56.10 control
+EOF
