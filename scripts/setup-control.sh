@@ -37,7 +37,7 @@ cat<<EOF >> /etc/hosts
 EOF
 
 echo "[CONTROL] Copy SSH Key to Managed Nodes:"
-NODES=(node1 node2)
+NODES=(node1 node2 node3)
 for node in "${NODES[@]}"; do
     sshpass -p "ansible" ssh-copy-id -o StrictHostKeyChecking=no -i /home/ansible/.ssh/id_rsa.pub ansible@$node
 done
