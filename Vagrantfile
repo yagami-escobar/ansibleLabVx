@@ -27,8 +27,7 @@ Vagrant.configure("2") do |config|
       echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
     SHELL
   end
-end
-
+  
   # Nodo de control
   config.vm.define "control" do |control|
     control.vm.hostname = "control"
@@ -41,3 +40,4 @@ end
       echo 'exec sudo -i -u ansible' >> /home/vagrant/.bashrc
     SHELL
   end
+end
