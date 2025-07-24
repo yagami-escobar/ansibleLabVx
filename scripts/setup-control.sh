@@ -29,14 +29,15 @@ sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_
 sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
-# echo "[CONTROL] Copy SSH Key to Managed Nodes:"
-# for ip in 192.168.56.11 192.168.56.12; do
-#     sshpass -p "ansible" scp ansible@control /home/ansible/.ssh/id_rsa.pub ansible@$ip:/home/ansible/.ssh/ansible.pub
-#     sshpass -p "ansible" ssh -o StrictHostKeyChecking=no ansible@$ip "cat ~/.ssh/ansible.pub >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && rm -fv ~/.ssh/ansible.pub"
-# done
-
 echo "[CONTROL] Add managed nodes to /etc/hosts:"
 cat<<EOF >> /etc/hosts
 192.168.56.11 node1
 192.168.56.12 node2
 EOF
+
+NODES=(node1 node2)
+echo "[CONTROL] Copy SSH Key to Managed Nodes:"
+for node in "${NODES[@]}"; do
+    sshpass -p "ansible" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub ansible@$node
+done
+

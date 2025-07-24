@@ -4,7 +4,7 @@ set -euo pipefail
 
 echo "[NODE] Install Pkgs Base:"
 apt-get update
-apt-get install -y sudo vim python3 python3-pip openssh-server curl iputils-ping net-tools iproute2 tree
+apt-get install -y sudo vim python3 python3-pip openssh-server curl iputils-ping net-tools iproute2 tree git
 
 echo "[NODE] Create Ansible User"
 useradd -m ansible
