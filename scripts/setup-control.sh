@@ -33,6 +33,7 @@ echo "[CONTROL] Add managed nodes to /etc/hosts:"
 cat<<EOF >> /etc/hosts
 192.168.56.11 node1
 192.168.56.12 node2
+192.168.56.13 node3
 EOF
 
 echo "[CONTROL] Copy SSH Key to Managed Nodes:"

@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
   # Nodo gestionado 3
   config.vm.define "node3" do |node3|
     node3.vm.hostname = "node3"
-    node3.vm.network "private_network", ip: "192.168.56.12"
+    node3.vm.network "private_network", ip: "192.168.56.13"
     node3.vm.provider "virtualbox" do |vb|
       vb.memory = 1024
     end
