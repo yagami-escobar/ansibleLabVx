@@ -4,7 +4,22 @@ set -euo pipefail
 
 echo "[NODE] Install Pkgs Base:"
 apt-get update
-apt-get install -y sudo vim python3 python3-pip openssh-server curl iputils-ping net-tools iproute2 tree git
+apt-get install -y \
+  sudo \
+  vim \
+  python3 \
+  python3-pip \
+  openssh-server \
+  curl \
+  iputils-ping \
+  net-tools \
+  iproute2 \
+  tree \
+  git
+
+# Instalar PyMySQL globalmente
+pip3 install PyMySQL
+
 
 echo "[NODE] Create Ansible User"
 useradd -m ansible

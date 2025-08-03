@@ -3,7 +3,24 @@ set -euo pipefail
 
 echo "[CONTROL] Install Pkgs Base:"
 apt-get update
-apt-get install -y sudo vim python3 python3-pip openssh-client sshpass ansible curl iputils-ping net-tools iproute2 tree git
+apt-get install -y \
+  sudo \
+  vim \
+  python3 \
+  python3-pip \
+  pymysql \
+  openssh-client \
+  sshpass \
+  ansible \
+  curl \
+  iputils-ping \
+  net-tools \
+  iproute2 \
+  tree \
+  git
+
+# Instalar PyMySQL globalmente
+pip3 install PyMySQL
 
 
 echo "[CONTROL] Create && Config User(Ansible):"
