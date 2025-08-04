@@ -2,8 +2,11 @@
 
 set -euo pipefail
 
-echo "[NODE] Install Pkgs Base:"
-apt-get update
+
+echo "[NODE] Update Apt ..."
+apt-get update -y
+
+echo "[NODE] Install Pkgs ..."
 apt-get install -y \
   sudo \
   vim \

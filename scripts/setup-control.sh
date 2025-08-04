@@ -1,8 +1,10 @@
 #! /bin/bash
 set -euo pipefail
 
-echo "[CONTROL] Install Pkgs Base:"
-apt-get update
+echo "[CONTROL] Update Apt ..."
+apt-get update -y
+
+echo "[CONTROL] Install Pkgs ..."
 apt-get install -y \
   sudo \
   vim \
